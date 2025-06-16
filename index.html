@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success Story</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        .story-container {
+            position: relative;
+            height: 500vh;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460);
+        }
+        .story-step {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .story-step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .story-step h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .story-step p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s;
+        }
+        .final-cta {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        .final-cta button {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+            transition: all 0.3s;
+        }
+        .final-cta button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 65, 108, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    
+    <div class="story-container">
+        <div class="story-step" id="step1">
+            <h2>🚧 The Problem</h2>
+            <p>In January 2023, this website was getting just 200 visitors/month and making $0 in revenue.</p>
+        </div>
+        
+        <div class="story-step" id="step2">
+            <h2>🔍 The Discovery</h2>
+            <p>We identified 3 critical issues: slow loading speed, poor SEO structure, and weak calls-to-action.</p>
+        </div>
+        
+        <div class="story-step" id="step3">
+            <h2>🛠️ The Fix</h2>
+            <p>Implemented our proven 3-step framework: Technical optimization, content strategy, and conversion funnel redesign.</p>
+        </div>
+        
+        <div class="story-step" id="step4">
+            <h2>📈 The Results</h2>
+            <p>By March 2023: 15,000 visitors/month and $8,500 in monthly revenue!</p>
+        </div>
+        
+        <div class="story-step" id="step5">
+            <h2>🎯 Your Turn</h2>
+            <p>This could be YOUR website transformation story...</p>
+            <div class="final-cta">
+                <button onclick="window.location.href='https://example.com/apply'">Get Your Free Audit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const steps = document.querySelectorAll('.story-step');
+        const progressBar = document.querySelector('.progress-bar');
+        
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const storyHeight = document.querySelector('.story-container').offsetHeight;
+            
+            // Update progress bar
+            const progress = (scrollPosition / (storyHeight - windowHeight)) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Activate steps based on scroll position
+            steps.forEach((step, index) => {
+                const stepTop = step.offsetTop;
+                const stepHeight = step.offsetHeight;
+                
+                if (scrollPosition > stepTop - windowHeight * 0.7 && 
+                    scrollPosition < stepTop + stepHeight - windowHeight * 0.3) {
+                    step.classList.add('active');
+                }
+            });
+        });
+        
+        // Initialize first step
+        steps[0].classList.add('active');
+    </script>
+</body>
+</html>
